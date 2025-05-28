@@ -49,8 +49,18 @@ BIST30_SYMBOLS = [
 ]
 
 # Dosya Yolları
-LOG_FILE_PATH = "/app/data/logs/bist_bot.log"
+LOG_DIR = "/app/data/logs"
+LOG_FILE_PATH = os.path.join(LOG_DIR, "bist_bot.log")
 REPORT_TEMPLATE_PATH = "templates/report_template.html"
+
+# Log klasörünü oluştur (eğer yoksa)
+# Bu, loglama konfigürasyonu yapılmadan önce çalışmalı
+if not os.path.exists(LOG_DIR):
+    try:
+        os.makedirs(LOG_DIR, exist_ok=True)
+        print(f"Log directory {LOG_DIR} created.")
+    except Exception as e:
+        print(f"Error creating log directory {LOG_DIR}: {e}")
 
 # Production/Development ayarları
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'

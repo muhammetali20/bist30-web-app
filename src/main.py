@@ -31,9 +31,9 @@ app.register_blueprint(bist30_bp, url_prefix='/api/bist30')
 
 # Ensure database and log directories exist on persistent storage
 db_dir = os.path.dirname(DATABASE_PATH)
-log_dir = os.path.dirname(LOG_FILE_PATH)
+# log_dir = os.path.dirname(LOG_FILE_PATH) # config.py hallediyor
 os.makedirs(db_dir, exist_ok=True)
-os.makedirs(log_dir, exist_ok=True)
+# os.makedirs(log_dir, exist_ok=True) # config.py hallediyor
 
 # Initialize database
 def init_db():
