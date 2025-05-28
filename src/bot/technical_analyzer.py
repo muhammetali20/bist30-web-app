@@ -15,13 +15,19 @@ import sys
 from src.bot.config import *
 
 # Loglama ayarları
+# LOG_FILE_PATH config.py'den None olarak gelecek, bu yüzden FileHandler kullanmayacağız.
+log_handlers = [logging.StreamHandler()] # Sadece konsola (stdout/stderr)
+
+# Eğer bir sebepten hala bir LOG_FILE_PATH tanımlıysa (None değilse)
+# ve bu bir string ise, o zaman FileHandler'ı ekleyebiliriz.
+# Ama Render.com için bunu istemiyoruz.
+# if LOG_FILE_PATH and isinstance(LOG_FILE_PATH, str):
+#     log_handlers.append(logging.FileHandler(LOG_FILE_PATH))
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(LOG_FILE_PATH),
-        logging.StreamHandler()
-    ]
+    handlers=log_handlers
 )
 logger = logging.getLogger('TechnicalAnalyzer')
 

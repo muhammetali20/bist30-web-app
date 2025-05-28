@@ -14,13 +14,13 @@ import sys
 from src.bot.config import *
 
 # Loglama ayarları
+# LOG_FILE_PATH config.py'den None olarak gelecek, bu yüzden FileHandler kullanmayacağız.
+log_handlers = [logging.StreamHandler()] # Sadece konsola (stdout/stderr)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler(LOG_FILE_PATH),
-        logging.StreamHandler()
-    ]
+    handlers=log_handlers
 )
 logger = logging.getLogger('DataFetcher')
 

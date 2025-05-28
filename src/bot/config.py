@@ -38,29 +38,18 @@ BOLLINGER_STD = 2  # Bollinger bantları standart sapma çarpanı
 # Veritabanı Ayarları
 BASE_DATA_PATH = "/app/data"  # Render.com'daki kalıcı diskin mount noktası
 DATABASE_NAME = "bist_bot.db"
-LOG_DIR_NAME = "logs"
-LOG_FILE_NAME = "bist_bot.log"
+# LOG_DIR_NAME = "logs" # Konsola loglama yapacağız
+# LOG_FILE_NAME = "bist_bot.log" # Konsola loglama yapacağız
 
 DATABASE_PATH = os.path.join(BASE_DATA_PATH, DATABASE_NAME)
-LOG_DIR = os.path.join(BASE_DATA_PATH, LOG_DIR_NAME)
-LOG_FILE_PATH = os.path.join(LOG_DIR, LOG_FILE_NAME)
+# LOG_DIR = os.path.join(BASE_DATA_PATH, LOG_DIR_NAME) # Konsola loglama yapacağız
+LOG_FILE_PATH = None # Dosyaya loglama yapmayacağız
 
 REPORT_TEMPLATE_PATH = "templates/report_template.html"
 
 # Gerekli klasörleri oluştur (eğer yoksa)
-# Render.com /app/data yolunu sağlar, biz alt klasörleri oluşturmalıyız.
-if not os.path.exists(LOG_DIR):
-    try:
-        os.makedirs(LOG_DIR) # exist_ok=True varsayılan olarak bu durumda gereksiz olabilir
-        print(f"Log directory {LOG_DIR} created.")
-    except OSError as e:
-        # Eğer klasör zaten varsa veya başka bir izin sorunu varsa
-        print(f"Error creating log directory {LOG_DIR}: {e}")
-        # Eğer hata "File exists" ise görmezden gelebiliriz, değilse loglayalım.
-        if e.errno != os.errno.EEXIST:
-            print(f"Critical error: Could not create log directory {LOG_DIR}. App may fail.")
-            # Uygulamanın çökmesini engellemek için log dosyasını geçici bir yere yazabiliriz
-            # veya loglamayı devre dışı bırakabiliriz. Şimdilik sadece print ile uyarıyoruz.
+# Log klasörü oluşturmaya gerek yok, konsola loglayacağız.
+# Veritabanı için ana klasörün (/app/data) varlığını kontrol etmeye gerek yok, Render sağlar.
 
 # BIST30 Hisseleri
 BIST30_SYMBOLS = [
