@@ -3,7 +3,7 @@ services:
     name: bist30-bot
     runtime: python
     buildCommand: pip install -r requirements-cloud.txt
-    startCommand: python src/main.py
+    startCommand: python main.py
     plan: free
     envVars:
       - key: DEBUG
