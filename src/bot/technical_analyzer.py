@@ -6,7 +6,7 @@ import os
 import logging
 import pandas as pd
 import numpy as np
-import talib
+# import talib  # Removed - using manual calculations instead
 from datetime import datetime
 import sqlite3
 import sys
