@@ -11,11 +11,11 @@ services:
       - key: PORT
         value: "10000"
       - key: SECRET_KEY
-        value: "bist30-production-secret-key-2024"
+        value: "your-secret-key-here"
       - key: TELEGRAM_TOKEN
-        value: "8046475269:AAHlONWcOHMZkn_mMsowXzqP6UqyJ4NMw1o"
+        value: "your-telegram-bot-token-here"
       - key: TELEGRAM_CHAT_ID
-        value: "1435753250"
+        value: "your-telegram-chat-id-here"
     disk:
       name: bist30-data
       mountPath: /app/data

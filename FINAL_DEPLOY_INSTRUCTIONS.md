@@ -1,9 +1,11 @@
 # 🎯 FINAL DEPLOY TALİMATLARI - BIST30 Bot
 
-## ✅ Bilgileriniz Hazır ve Doğru:
+## ✅ Bilgileriniz Hazır:
 - **Token:** `8046475269:AAHlONWcOHMZkn_mMsowXzqP6UqyJ4NMw1o`
 - **Chat ID:** `1435753250`
 - **Bot:** `@bist_30_bot`
+
+⚠️ **GÜVENLİK NOTU:** Bu bilgiler GitHub'da gizli tutulacak, sadece Render.com'da environment variables'a ekleyeceğiz!
 
 ## 🚀 1. Render.com Deploy - 5 Dakika!
 
@@ -32,7 +34,7 @@ Start Command: python src/main.py
 Plan: Free
 ```
 
-### Adım 5: Environment Variables
+### Adım 5: Environment Variables (ÇOK ÖNEMLİ!)
 **Environment** sekmesinde şunları ekleyin:
 
 ```
@@ -41,6 +43,8 @@ SECRET_KEY=bist30-production-secret-key-2024
 TELEGRAM_TOKEN=8046475269:AAHlONWcOHMZkn_mMsowXzqP6UqyJ4NMw1o
 TELEGRAM_CHAT_ID=1435753250
 ```
+
+⚠️ **ÖNEMLİ:** Bu değerleri Render.com'da manuel olarak girmelisiniz. GitHub'da asla gerçek token'ları yazmayın!
 
 ### Adım 6: Disk Mount
 **Disks** sekmesinde:
