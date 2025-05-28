@@ -6,10 +6,3 @@ numpy==1.24.3
 python-telegram-bot==20.8
 gunicorn==20.1.0
 whitenoise==6.5.0
-# TA-Lib Python wrapper - Requires TA-Lib C library to be installed first
-# See installation instructions in README.md
-ta-lib==0.6.3
-# Yeni eklenen bağımlılıklar
-matplotlib==3.8.0
-plotly==5.18.0
-seaborn==0.13.0
