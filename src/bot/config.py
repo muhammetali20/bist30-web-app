@@ -36,7 +36,7 @@ BOLLINGER_PERIOD = 20  # Bollinger bantları periyodu
 BOLLINGER_STD = 2  # Bollinger bantları standart sapma çarpanı
 
 # Veritabanı Ayarları
-DATABASE_PATH = "data/bist_bot.db"
+DATABASE_PATH = "/app/data/bist_bot.db"
 
 # BIST30 Hisseleri
 BIST30_SYMBOLS = [
@@ -49,7 +49,7 @@ BIST30_SYMBOLS = [
 ]
 
 # Dosya Yolları
-LOG_FILE_PATH = "logs/bist_bot.log"
+LOG_FILE_PATH = "/app/data/logs/bist_bot.log"
 REPORT_TEMPLATE_PATH = "templates/report_template.html"
 
 # Production/Development ayarları

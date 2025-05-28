@@ -8,6 +8,9 @@ import logging
 from datetime import datetime
 import sqlite3
 
+# Import bot config to get correct paths
+from src.bot.config import DATABASE_PATH, LOG_FILE_PATH
+
 # Import routes
 from src.routes.user import user_bp
 from src.routes.bist30 import bist30_bp
@@ -26,13 +29,15 @@ app.wsgi_app = WhiteNoise(app.wsgi_app, root='src/static/')
 app.register_blueprint(user_bp, url_prefix='/api/user')
 app.register_blueprint(bist30_bp, url_prefix='/api/bist30')
 
-# Ensure database directory exists
-os.makedirs(os.path.join(os.path.dirname(__file__), 'bot/data'), exist_ok=True)
-os.makedirs(os.path.join(os.path.dirname(__file__), 'bot/logs'), exist_ok=True)
+# Ensure database and log directories exist on persistent storage
+db_dir = os.path.dirname(DATABASE_PATH)
+log_dir = os.path.dirname(LOG_FILE_PATH)
+os.makedirs(db_dir, exist_ok=True)
+os.makedirs(log_dir, exist_ok=True)
 
 # Initialize database
 def init_db():
-    db_path = os.path.join(os.path.dirname(__file__), 'bot/data/bist_bot.db')
+    db_path = DATABASE_PATH
     
     try:
         conn = sqlite3.connect(db_path)
