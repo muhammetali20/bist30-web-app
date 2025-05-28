@@ -36,7 +36,31 @@ BOLLINGER_PERIOD = 20  # Bollinger bantları periyodu
 BOLLINGER_STD = 2  # Bollinger bantları standart sapma çarpanı
 
 # Veritabanı Ayarları
-DATABASE_PATH = "/app/data/bist_bot.db"
+BASE_DATA_PATH = "/app/data"  # Render.com'daki kalıcı diskin mount noktası
+DATABASE_NAME = "bist_bot.db"
+LOG_DIR_NAME = "logs"
+LOG_FILE_NAME = "bist_bot.log"
+
+DATABASE_PATH = os.path.join(BASE_DATA_PATH, DATABASE_NAME)
+LOG_DIR = os.path.join(BASE_DATA_PATH, LOG_DIR_NAME)
+LOG_FILE_PATH = os.path.join(LOG_DIR, LOG_FILE_NAME)
+
+REPORT_TEMPLATE_PATH = "templates/report_template.html"
+
+# Gerekli klasörleri oluştur (eğer yoksa)
+# Render.com /app/data yolunu sağlar, biz alt klasörleri oluşturmalıyız.
+if not os.path.exists(LOG_DIR):
+    try:
+        os.makedirs(LOG_DIR) # exist_ok=True varsayılan olarak bu durumda gereksiz olabilir
+        print(f"Log directory {LOG_DIR} created.")
+    except OSError as e:
+        # Eğer klasör zaten varsa veya başka bir izin sorunu varsa
+        print(f"Error creating log directory {LOG_DIR}: {e}")
+        # Eğer hata "File exists" ise görmezden gelebiliriz, değilse loglayalım.
+        if e.errno != os.errno.EEXIST:
+            print(f"Critical error: Could not create log directory {LOG_DIR}. App may fail.")
+            # Uygulamanın çökmesini engellemek için log dosyasını geçici bir yere yazabiliriz
+            # veya loglamayı devre dışı bırakabiliriz. Şimdilik sadece print ile uyarıyoruz.
 
 # BIST30 Hisseleri
 BIST30_SYMBOLS = [
@@ -47,20 +71,6 @@ BIST30_SYMBOLS = [
     "TAVHL", "TCELL", "THYAO", "TOASO", "TTKOM", 
     "TUPRS", "ULKER", "YKBNK", "PGSUS", "ASTOR"
 ]
-
-# Dosya Yolları
-LOG_DIR = "/app/data/logs"
-LOG_FILE_PATH = os.path.join(LOG_DIR, "bist_bot.log")
-REPORT_TEMPLATE_PATH = "templates/report_template.html"
-
-# Log klasörünü oluştur (eğer yoksa)
-# Bu, loglama konfigürasyonu yapılmadan önce çalışmalı
-if not os.path.exists(LOG_DIR):
-    try:
-        os.makedirs(LOG_DIR, exist_ok=True)
-        print(f"Log directory {LOG_DIR} created.")
-    except Exception as e:
-        print(f"Error creating log directory {LOG_DIR}: {e}")
 
 # Production/Development ayarları
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'

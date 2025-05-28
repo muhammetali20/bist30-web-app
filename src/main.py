@@ -30,9 +30,9 @@ app.register_blueprint(user_bp, url_prefix='/api/user')
 app.register_blueprint(bist30_bp, url_prefix='/api/bist30')
 
 # Ensure database and log directories exist on persistent storage
-db_dir = os.path.dirname(DATABASE_PATH)
+# db_dir = os.path.dirname(DATABASE_PATH) # config.py /app/data olduğunu varsayar
 # log_dir = os.path.dirname(LOG_FILE_PATH) # config.py hallediyor
-os.makedirs(db_dir, exist_ok=True)
+# os.makedirs(db_dir, exist_ok=True) # /app/data Render tarafından sağlanmalı
 # os.makedirs(log_dir, exist_ok=True) # config.py hallediyor
 
 # Initialize database
