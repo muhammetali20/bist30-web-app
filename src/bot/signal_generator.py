@@ -215,6 +215,27 @@ class SignalGenerator:
                     'last_date': None
                 }
             
+            # Eğer teknik göstergeler None ise hesapla
+            if data.iloc[-1]['ma_short'] is None or pd.isna(data.iloc[-1]['ma_short']):
+                logger.info(f"{symbol} için teknik göstergeler eksik, hesaplanıyor...")
+                from src.bot.technical_analyzer import TechnicalAnalyzer
+                ta = TechnicalAnalyzer(self.db_path)
+                full_data = ta.calculate_all_indicators(symbol)
+                if full_data is not None and not full_data.empty:
+                    # Son 10 satırı al
+                    data = full_data.tail(10).copy()
+                else:
+                    logger.warning(f"{symbol} için teknik göstergeler hesaplanamadı")
+                    return {
+                        'symbol': symbol,
+                        'buy_signal': False,
+                        'sell_signal': False,
+                        'buy_reason': "Teknik göstergeler hesaplanamadı",
+                        'sell_reason': "Teknik göstergeler hesaplanamadı",
+                        'current_price': None,
+                        'last_date': None
+                    }
+            
             # Son fiyat ve tarih
             last_row = data.iloc[-1]
             current_price = last_row['close']

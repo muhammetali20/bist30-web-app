@@ -36,10 +36,19 @@ BOLLINGER_PERIOD = 20  # Bollinger bantları periyodu
 BOLLINGER_STD = 2  # Bollinger bantları standart sapma çarpanı
 
 # Veritabanı Ayarları
-BASE_DATA_PATH = "/app/data"  # Render.com'daki kalıcı diskin mount noktası
+# Render.com için kalıcı disk yolu, yerel ortamda yerel klasör
+if os.path.exists("/app/data"):
+    BASE_DATA_PATH = "/app/data"  # Render.com'daki kalıcı diskin mount noktası
+else:
+    # Yerel geliştirme ortamı için
+    BASE_DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+    
 DATABASE_NAME = "bist_bot.db"
 # LOG_DIR_NAME = "logs" # Konsola loglama yapacağız
 # LOG_FILE_NAME = "bist_bot.log" # Konsola loglama yapacağız
+
+# Veritabanı klasörünü oluştur (eğer yoksa)
+os.makedirs(BASE_DATA_PATH, exist_ok=True)
 
 DATABASE_PATH = os.path.join(BASE_DATA_PATH, DATABASE_NAME)
 # LOG_DIR = os.path.join(BASE_DATA_PATH, LOG_DIR_NAME) # Konsola loglama yapacağız

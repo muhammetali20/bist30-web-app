@@ -132,7 +132,10 @@ class DataFetcher:
                 formatted_symbol,
                 interval=interval,
                 period=period,
-                progress=False
+                progress=False,
+                auto_adjust=True,
+                prepost=False,
+                threads=True
             )
             
             if data.empty:
@@ -141,6 +144,13 @@ class DataFetcher:
             
             # Veriyi düzenle
             data = data.reset_index()
+            
+            # MultiIndex columns'u düzelt (yeni Yahoo Finance API)
+            if isinstance(data.columns, pd.MultiIndex):
+                # İkinci seviye sütun adlarını al (ticker kısmını kaldır)
+                data.columns = [col[0] if col[0] != 'Date' else 'Date' for col in data.columns]
+            
+            # Sütun adlarını düzenle
             data.columns = [col if col != 'Date' else 'date' for col in data.columns]
             data.columns = [col.lower() for col in data.columns]
             
