@@ -1,0 +1,13 @@
+Flask==3.1.0
+Flask-SQLAlchemy==3.1.1
+yfinance==0.2.61
+pandas==2.2.3
+numpy==2.2.6
+python-telegram-bot==22.1
+# TA-Lib Python wrapper - Requires TA-Lib C library to be installed first
+# See installation instructions in README.md
+ta-lib==0.6.3
+# Yeni eklenen bağımlılıklar
+matplotlib==3.8.0
+plotly==5.18.0
+seaborn==0.13.0

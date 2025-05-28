@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: bist30-bot
+    runtime: python
+    buildCommand: pip install -r requirements-cloud.txt
+    startCommand: python src/main.py
+    plan: free
+    envVars:
+      - key: DEBUG
+        value: "false"
+      - key: PORT
+        value: "10000"
+      - key: SECRET_KEY
+        value: "bist30-production-secret-key-2024"
+      - key: TELEGRAM_TOKEN
+        value: "8046475269:AAHlONWcOHMZkn_mMsowXzqP6UqyJ4NMw1o"
+      - key: TELEGRAM_CHAT_ID
+        value: "1435753250"
+    disk:
+      name: bist30-data
+      mountPath: /app/data
+      sizeGB: 1 

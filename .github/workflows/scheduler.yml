@@ -1,0 +1,33 @@
+name: BIST30 Bot Scheduler
+
+on:
+  schedule:
+    # Hafta içi her gün saat 10:00'da (UTC)
+    - cron: '0 10 * * 1-5'
+    # Hafta içi her gün saat 15:00'te (UTC) - Borsa kapanış öncesi
+    - cron: '0 15 * * 1-5'
+  
+  # Manuel olarak da çalıştırılabilir
+  workflow_dispatch:
+
+jobs:
+  run-weekly-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Trigger Weekly Analysis
+      run: |
+        curl -X POST "${{ secrets.APP_URL }}/api/bist30/run-weekly-analysis" \
+          -H "Content-Type: application/json" \
+          --fail \
+          --max-time 300
+      
+    - name: Notify on Success
+      if: success()
+      run: |
+        echo "✅ BIST30 analizi başarıyla tamamlandı"
+        
+    - name: Notify on Failure  
+      if: failure()
+      run: |
+        echo "❌ BIST30 analizi başarısız oldu" 
